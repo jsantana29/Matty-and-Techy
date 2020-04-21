@@ -27,6 +27,7 @@ public class GroundPound : MonoBehaviour
         if (!status.getGrounded() && Input.GetButtonDown("GroundPound"))
         {
             pounding = true;
+            status.setPounding(true);
             anim.SetBool("Pounding", pounding);
             //Debug.Log("Ground pound input handled");
 
@@ -39,11 +40,13 @@ public class GroundPound : MonoBehaviour
         {
             GetComponent<Rigidbody2D>().velocity = new Vector2(0, dropSpeed);
 
+
         }
 
         if (status.getGrounded())
         {
             pounding = false;
+            status.setPounding(false);
             anim.SetBool("Pounding", pounding);
         }
     }

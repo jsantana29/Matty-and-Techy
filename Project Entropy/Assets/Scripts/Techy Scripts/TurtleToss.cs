@@ -33,10 +33,10 @@ public class TurtleToss : MonoBehaviour
         tossing = false;
         canToss = true;
         stationary = false;
-        tossVelocity = 20;
-        tossDistance = 10;
+        tossVelocity = 40;
+        tossDistance = 7;
         tossTimer = 0;
-        tossCooldown = 2;
+        tossCooldown = 1;
         rb = GetComponent<Rigidbody2D>();
         status = FindObjectOfType<PlayerStatuses>();
     }
@@ -58,12 +58,12 @@ public class TurtleToss : MonoBehaviour
             tossTimer = 0;
         }
 
-        if (Input.GetButton("TurtleToss") && canToss)
+        if (Input.GetButtonDown("TurtleToss") && canToss)
         {
             tossed = true;
 
         }
-        else if (Input.GetButton("TurtleToss") && stationary)
+        else if (Input.GetButtonDown("TurtleToss") && stationary)
         {
             resetTechy();
 

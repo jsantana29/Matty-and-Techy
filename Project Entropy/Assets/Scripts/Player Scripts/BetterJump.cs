@@ -64,6 +64,12 @@ public class BetterJump : MonoBehaviour
             }
         }
 
+        if (status.getTechyBounce())
+        {
+            techyBounce();
+            status.setTechyBounce(false);
+        }
+
         //Increases gravity when player is falling. Also accounts for when the player only holds jump for a short time
         if (rb.velocity.y < 0)
         {
@@ -87,6 +93,12 @@ public class BetterJump : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, doubleJumpHeight);
         }
 
+    }
+
+    void techyBounce()
+    {
+        rb.velocity = new Vector2(rb.velocity.x, jumpHeight * 3);
+        //status.setPounding(false);
     }
 
 

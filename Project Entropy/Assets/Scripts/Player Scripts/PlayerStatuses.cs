@@ -21,6 +21,8 @@ public class PlayerStatuses : MonoBehaviour
     public bool onCeiling;
     public bool knocked;
     public bool shootingDown;
+    public bool techyBounce;
+    public bool pounding;
 
     //Movement speed values
     private float currentMaxSpeed;
@@ -40,6 +42,8 @@ public class PlayerStatuses : MonoBehaviour
     void Start()
     {
         currentMaxSpeed = normalSpeed;
+        techyBounce = false;
+        pounding = false;
     }
 
     // Update is called once per frame
@@ -106,6 +110,26 @@ public class PlayerStatuses : MonoBehaviour
     public float getLocalScale()
     {
         return transform.localScale.x;
+    }
+
+    public bool getTechyBounce()
+    {
+        return techyBounce;
+    }
+
+    public void setTechyBounce(bool bounce)
+    {
+        techyBounce = bounce;
+    }
+
+    public bool getPounding()
+    {
+        return pounding;
+    }
+
+    public void setPounding(bool pound)
+    {
+        pounding = pound;
     }
 
 }
