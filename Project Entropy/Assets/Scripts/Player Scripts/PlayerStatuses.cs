@@ -23,6 +23,7 @@ public class PlayerStatuses : MonoBehaviour
     public bool shootingDown;
     public bool techyBounce;
     public bool pounding;
+    public bool facingRight = true;
 
     //Movement speed values
     private float currentMaxSpeed;
@@ -31,7 +32,14 @@ public class PlayerStatuses : MonoBehaviour
 
     //Terrain check radii
     private float groundCheckRadius = 0.4f;
+
     private float wallCheckRadius = 0.1f;
+
+    //private float boxSizeX = 0.819356f;
+    //private float boxSizeY = 0.1286554f;
+
+    //private float boxSizeX = groundcheck.GetComponent<BoxCollider2D>().size.x;
+    //private float boxSizeY = groundcheck.GetComponent<BoxCollider2D>().size.y;
 
     //Status options
     public bool isAlive = true;
@@ -49,7 +57,8 @@ public class PlayerStatuses : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        grounded = Physics2D.OverlapCircle(groundcheck.position, groundCheckRadius, whatIsGround);
+        //grounded = Physics2D.OverlapCircle(groundcheck.position, groundCheckRadius, whatIsGround);
+        grounded = Physics2D.OverlapBox(groundcheck.position, groundcheck.GetComponent<BoxCollider2D>().size, 0, whatIsGround);
         hangingOffWall = Physics2D.OverlapCircle(wallCheck.position, wallCheckRadius, whatIsWall);
     }
 
@@ -87,6 +96,17 @@ public class PlayerStatuses : MonoBehaviour
     {
         return shootingDown;
     }
+
+    public bool getFacingRight()
+    {
+        return facingRight;
+    }
+
+    public void setGrounded(bool ground)
+    {
+        this.grounded = ground;
+    }
+
     public void setShootDown(bool shootingDown)
     {
         this.shootingDown = shootingDown;
@@ -130,6 +150,11 @@ public class PlayerStatuses : MonoBehaviour
     public void setPounding(bool pound)
     {
         pounding = pound;
+    }
+
+    public void setFacingRight(bool right)
+    {
+        this.facingRight = right;
     }
 
 }

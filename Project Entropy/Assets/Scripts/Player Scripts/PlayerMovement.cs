@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
     private float playerVelocity;
     public float testSpeed;
     //public float maxSpeed;
-    private float speedMulti = 0.6f;
+    private float speedMulti = 1.2f;
     private float drag = 0.8f;
 
     private float dragLimit = 1f;
@@ -47,13 +47,23 @@ public class PlayerMovement : MonoBehaviour
         {
             GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.x + playerVelocity, GetComponent<Rigidbody2D>().velocity.y);
             transform.localScale = new Vector3(faceRight, 1f, 1f);
+            // if (!status.getFacingRight())
+            // {
+            //     Flip();
+            // }
+
             mattyFactor = 1.0f;
         }
 
-        if (playerVelocity < 0)
+        if (playerVelocity < 0 && status.getFacingRight())
         {
             GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.x + playerVelocity, GetComponent<Rigidbody2D>().velocity.y);
             transform.localScale = new Vector3(faceLeft, 1f, 1f);
+            // if (status.getFacingRight())
+            // {
+            //     Flip();
+            // }
+
             mattyFactor = -1.0f;
         }
 
@@ -96,6 +106,12 @@ public class PlayerMovement : MonoBehaviour
         }
 
         testSpeed = GetComponent<Rigidbody2D>().velocity.x;
+    }
+
+    void Flip()
+    {
+        status.setFacingRight(!status.getFacingRight());
+        transform.Rotate(0f, 180f, 0f);
     }
 
     void changeFriction(float frictionValue)
