@@ -36,8 +36,6 @@ public class PlayerMovement : MonoBehaviour
     {
         playerVelocity = Input.GetAxisRaw("Horizontal") * speedMulti;
 
-
-
     }
 
     void FixedUpdate()
