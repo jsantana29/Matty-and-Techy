@@ -6,6 +6,7 @@ public class PlayerStatuses : MonoBehaviour
 {
     //Terrain transforms
     public Transform groundcheck;
+    public Transform extendCheck;
     public Transform wallCheck;
     public Transform cornerCheck;
     public Transform ceilingCheck;
@@ -25,6 +26,8 @@ public class PlayerStatuses : MonoBehaviour
     public bool pounding;
     public bool facingRight = true;
     public bool isLaunched { get; set; }
+    public bool canLaunch { get; set; }
+    public bool canExtendDash;
 
     //Movement speed values
     private float currentMaxSpeed;
@@ -53,6 +56,8 @@ public class PlayerStatuses : MonoBehaviour
         currentMaxSpeed = normalSpeed;
         techyBounce = false;
         pounding = false;
+        canLaunch = true;
+        canExtendDash = false;
     }
 
     // Update is called once per frame
@@ -60,6 +65,13 @@ public class PlayerStatuses : MonoBehaviour
     {
         //grounded = Physics2D.OverlapCircle(groundcheck.position, groundCheckRadius, whatIsGround);
         grounded = Physics2D.OverlapBox(groundcheck.position, groundcheck.GetComponent<BoxCollider2D>().size, 0, whatIsGround);
+        //canExtendDash = Physics2D.OverlapBox(extendCheck.position, extendCheck.GetComponent<BoxCollider2D>().size, 0, whatIsGround);
+        
+
+        // if(grounded && !isLaunched){
+        //     canExtendDash = false;
+        // }
+        
         hangingOffWall = Physics2D.OverlapCircle(wallCheck.position, wallCheckRadius, whatIsWall);
     }
 

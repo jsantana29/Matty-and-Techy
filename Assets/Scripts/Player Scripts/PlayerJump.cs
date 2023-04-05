@@ -30,7 +30,6 @@ public class PlayerJump : MonoBehaviour
     void Update()
     {
         
-
         if(Input.GetButtonDown("Jump")){
             hasJumped = true;
         }

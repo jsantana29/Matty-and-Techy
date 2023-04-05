@@ -28,6 +28,9 @@ public class BetterJump : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // if(status.isLaunched){
+        //     return;
+        // }
         //Checks for the jump button press
         if (Input.GetButtonDown("Jump") && (status.getGrounded() || status.getHanging()))
         {
@@ -50,6 +53,9 @@ public class BetterJump : MonoBehaviour
 
     private void FixedUpdate()
     {
+        // if(status.isLaunched){
+        //     return;
+        // }
 
         //Checks if the player pressed the jump button before applying the jump
         if (jumped || doubleJumped)

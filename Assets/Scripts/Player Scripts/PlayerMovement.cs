@@ -34,12 +34,19 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(status.isLaunched){
+            return;
+        }
+
         playerVelocity = Input.GetAxisRaw("Horizontal") * speedMulti;
 
     }
 
     void FixedUpdate()
     {
+        if(status.isLaunched){
+            return;
+        }
 
         if (playerVelocity > 0)
         {
