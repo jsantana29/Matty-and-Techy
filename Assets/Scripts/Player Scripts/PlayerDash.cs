@@ -38,6 +38,7 @@ public class PlayerDash : MonoBehaviour
                 stopLaunch();
             }else if(Input.GetButtonDown("Jump")){
                 rb.velocity = new Vector2(transform.localScale.x * launchPower, rb.velocity.y + launchHeight);
+                status.extendedDash = true;
                 current = 0;
                 Debug.Log("Extended dash");
             }
@@ -48,6 +49,10 @@ public class PlayerDash : MonoBehaviour
             StartCoroutine(Launch());
         }
 
+        if(Input.GetButtonDown("Cannon Launch") && status.extendedDash){
+            stopLaunch();
+        }
+
         
     }
 
@@ -56,7 +61,7 @@ public class PlayerDash : MonoBehaviour
         status.isLaunched = true;
         float originalGravity = rb.gravityScale;
         rb.gravityScale = 0f;
-        rb.velocity = new Vector2(transform.localScale.x * launchPower, 0f);
+        rb.velocity = new Vector2(transform.localScale.x * launchPower, launchHeight);
         tr.emitting = true;
         yield return new WaitForSeconds(launchTime);
         //tr.emitting = false;
@@ -72,5 +77,6 @@ public class PlayerDash : MonoBehaviour
         status.isLaunched = false;
         tr.emitting = false;
         current = 0;
+        status.extendedDash = false;
     }
 }

@@ -28,6 +28,7 @@ public class PlayerStatuses : MonoBehaviour
     public bool isLaunched { get; set; }
     public bool canLaunch { get; set; }
     public bool canExtendDash;
+    public bool extendedDash;
 
     //Movement speed values
     private float currentMaxSpeed;
@@ -58,6 +59,7 @@ public class PlayerStatuses : MonoBehaviour
         pounding = false;
         canLaunch = true;
         canExtendDash = false;
+        extendedDash = false;
     }
 
     // Update is called once per frame
