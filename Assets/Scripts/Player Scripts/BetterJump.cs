@@ -37,7 +37,7 @@ public class BetterJump : MonoBehaviour
             jumped = true;
         }
 
-        if (Input.GetButtonDown("Jump") && !(status.getGrounded() || status.getHanging()) && numberOfJumps > 0)
+        if (Input.GetButtonDown("Jump") && !(status.getGrounded() || status.getHanging() || status.isLaunched) && numberOfJumps > 0)
         {
             doubleJumped = true;
         }
