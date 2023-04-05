@@ -4812,12 +4812,16 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1205395600, guid: 20f4a0dd2ca7cde4fb7cbd48ccd61429, type: 3}
+      propertyPath: launchPower
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1205395600, guid: 20f4a0dd2ca7cde4fb7cbd48ccd61429, type: 3}
       propertyPath: launchHeight
-      value: 10
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1205395600, guid: 20f4a0dd2ca7cde4fb7cbd48ccd61429, type: 3}
       propertyPath: launchCooldown
-      value: 0.08
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 2024888674, guid: 20f4a0dd2ca7cde4fb7cbd48ccd61429, type: 3}
       propertyPath: m_Size.x
