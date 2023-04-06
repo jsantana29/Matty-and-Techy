@@ -24,15 +24,11 @@ public class PlayerDash : MonoBehaviour
     // Update is called once per frame
     void Update()
     {   
-        // if(status.canExtendDash && Input.GetButtonDown("Jump")){
-        //     rb.velocity = new Vector2(transform.localScale.x * launchPower, rb.velocity.y);
-        //     Debug.Log("Extended dash");
-        // }
         if(status.getPounding()){
             stopLaunch();
         }
 
-        if(status.grounded && status.isLaunched){
+        if((status.grounded || status.hangingOffWall) && status.isLaunched){
             current += Time.deltaTime;
             if(current > launchCooldown){
                 stopLaunch();
