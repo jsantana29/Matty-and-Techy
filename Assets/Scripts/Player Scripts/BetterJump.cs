@@ -6,9 +6,10 @@ public class BetterJump : MonoBehaviour
 {
     private float fallMultiplier = 3.5f;
     private float lowJumpMultiplier = 12f;
-    private float jumpHeight = 19f;
+    [SerializeField]private float jumpHeight = 19f;
+    [SerializeField]private float superJumpHeight = 30f;
 
-    private float doubleJumpHeight = 16f;
+    [SerializeField]private float doubleJumpHeight = 16f;
 
     private bool jumped;
     private bool doubleJumped;
@@ -60,7 +61,13 @@ public class BetterJump : MonoBehaviour
         //Checks if the player pressed the jump button before applying the jump
         if (jumped || doubleJumped)
         {
-            jump();
+            if(status.bounceReady){
+                jump(superJumpHeight, doubleJumpHeight);
+                Debug.Log("Bounced");
+            }else{
+                jump(jumpHeight, doubleJumpHeight);
+            }
+            
             numberOfJumps--;
             jumped = false;
 
@@ -88,15 +95,16 @@ public class BetterJump : MonoBehaviour
         }
     }
 
-    void jump()
+    void jump(float jumpVal, float doubleJumpVal)
     {
         if (jumped)
         {
-            rb.velocity = new Vector2(rb.velocity.x, jumpHeight);
+            rb.velocity = new Vector2(rb.velocity.x, jumpVal);
+            Debug.Log("Jump height: "+jumpVal);
         }
         else if (doubleJumped)
         {
-            rb.velocity = new Vector2(rb.velocity.x, doubleJumpHeight);
+            rb.velocity = new Vector2(rb.velocity.x, doubleJumpVal);
         }
 
     }

@@ -14,6 +14,16 @@ public class GroundPound : MonoBehaviour
     private float hangTimer;
     private float currentHangtime;
     private float maxHangTime;
+
+    [SerializeField]private float bounceWindow;
+    [SerializeField]private float currentBounceTime;
+    [SerializeField]private float bounceHeight;
+    //[SerializeField]private bool bounceReady;
+
+
+    private Rigidbody2D rb;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,8 +32,10 @@ public class GroundPound : MonoBehaviour
         currentHangtime = 0f;
         pounding = false;
         hangtime = false;
+        //bounceReady = false;
         status = FindObjectOfType<PlayerStatuses>();
         anim = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody2D>();
         anim.SetBool("Pounding", false);
     }
 
@@ -32,18 +44,68 @@ public class GroundPound : MonoBehaviour
     {
         //Debug.Log(Input.GetButtonDown("GroundPound"));
 
-        if (!status.getGrounded() && Input.GetButtonDown("GroundPound"))
+        if (!status.getGrounded() && Input.GetButtonDown("GroundPound") && !pounding)
         {
             pounding = true;
             status.setPounding(true);
             anim.SetBool("Pounding", pounding);
-            //Debug.Log("Ground pound input handled");
+            Debug.Log("Ground pound pressed");
+            hangtime = true;
+            
 
-            if (!hangtime)
-            {
-                hangtime = true;
+            // if (!hangtime)
+            // {
+            //     hangtime = true;
+            // }
+
+        }else if(!status.getGrounded() && Input.GetButtonDown("GroundPound") && pounding){
+            hangtime = false;
+        }
+
+        
+        
+
+        if (status.getGrounded() && status.pounding)
+        {
+            status.bounceReady = true;
+
+            // currentBounceTime += Time.deltaTime;
+            // if(currentBounceTime > bounceWindow){
+            //     currentBounceTime = 0;
+            //     bounceReady = false;
+                
+            // }else if(Input.GetButtonDown("Jump") && bounceReady){
+            //     rb.velocity = new Vector2(rb.velocity.x, bounceHeight);
+            //     Debug.Log("Bounced");
+            //     currentBounceTime = 0;
+            //     bounceReady = false;
+            // }else{
+            //     currentBounceTime = 0;
+            //     status.pounding = false;
+            //     pounding = false;
+            //     anim.SetBool("Pounding", pounding);
+            // }
+            status.pounding = false;
+            pounding = false;
+            anim.SetBool("Pounding", pounding);
+
+            
+           
+        }
+
+        if(status.bounceReady){
+            currentBounceTime += Time.deltaTime;
+            if(currentBounceTime > bounceWindow){
+                currentBounceTime = 0;
+                status.bounceReady = false;
+                
             }
-
+            // else if(Input.GetButtonDown("Jump")){
+            //     rb.velocity = new Vector2(rb.velocity.x, bounceHeight);
+            //     Debug.Log("Bounced");
+            //     currentBounceTime = 0;
+            //     status.bounceReady = false;
+            // }
         }
 
 
@@ -79,11 +141,6 @@ public class GroundPound : MonoBehaviour
 
         }
 
-        if (status.getGrounded() || status.getTechyBounce())
-        {
-            pounding = false;
-            status.setPounding(false);
-            anim.SetBool("Pounding", pounding);
-        }
+        
     }
 }
