@@ -44,19 +44,26 @@ public class GroundPound : MonoBehaviour
     {
         //Debug.Log(Input.GetButtonDown("GroundPound"));
 
-        if (!status.getGrounded() && Input.GetButtonDown("GroundPound"))
+        if (!status.getGrounded() && Input.GetButtonDown("GroundPound") && !pounding)
         {
             pounding = true;
             status.setPounding(true);
             anim.SetBool("Pounding", pounding);
-            //Debug.Log("Ground pound input handled");
+            Debug.Log("Ground pound pressed");
+            hangtime = true;
+            
 
-            if (!hangtime)
-            {
-                hangtime = true;
-            }
+            // if (!hangtime)
+            // {
+            //     hangtime = true;
+            // }
 
+        }else if(!status.getGrounded() && Input.GetButtonDown("GroundPound") && pounding){
+            hangtime = false;
         }
+
+        
+        
 
         if (status.getGrounded() && status.pounding)
         {
